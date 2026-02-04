@@ -1,0 +1,97 @@
+:root {
+  --bg-main:#0b1f17;
+  --bg-panel:#102a20;
+  --green-main:#1f6b3a;
+  --green-accent:#2ea66f;
+  --text-main:#e6f4ee;
+  --text-muted:#9fbfb2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  color: var(--green-accent);
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+.box {
+  background: var(--bg-panel);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  background: #0d2a20;
+  border: 1px solid var(--green-main);
+  color: var(--text-main);
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background: var(--green-main);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: var(--green-accent);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 6px;
+  cursor: pointer;
+  border-bottom: 1px solid #1b3f31;
+}
+
+li:hover {
+  background: #163d2e;
+}
+
+#dropZone {
+  border: 2px dashed var(--green-main);
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#dropZone input {
+  display: block;
+  margin: 10px auto;
+}
+
+.img-buttons button {
+  margin-right: 10px;
+}

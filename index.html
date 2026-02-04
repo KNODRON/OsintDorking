@@ -3,44 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title>OSINT Dorking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-  <h1>OSINT Dorking</h1>
-  <p class="subtitle">Uso analítico responsable — Generador de búsquedas</p>
+  <header>
+    <h1>OSINT Dorking</h1>
+    <p class="subtitle">Uso analítico responsable — Generador de búsquedas OSINT</p>
+  </header>
 
-  <div class="box">
+  <section class="box">
     <label>Texto a buscar</label>
     <input type="text" id="query" placeholder="Nombre, alias, correo">
 
     <label>Dominio (opcional)</label>
     <input type="text" id="domain" placeholder="ej: dominio.cl">
 
+    <div class="mode-select">
+      <label>
+        <input type="radio" name="mode" value="os9" checked>
+        OS9 Chile
+      </label>
+      <label>
+        <input type="radio" name="mode" value="global">
+        OSINT Global
+      </label>
+    </div>
+
     <button onclick="generateDorks()">Generar Dorks</button>
-  </div>
+  </section>
 
-  <div class="box">
+  <section class="box">
     <h2>Dorks generadas</h2>
+    <p class="hint">Haz clic sobre una dork para buscarla directamente en Google.</p>
     <ul id="results"></ul>
-  </div>
+  </section>
 
-  <div class="box">
-    <h2>Búsqueda por imagen</h2>
-
-    <div id="dropZone">
-      Arrastra una imagen aquí o selecciona un archivo
-      <input type="file" id="imageInput" accept="image/*">
-    </div>
-
-    <div class="img-buttons">
-      <button onclick="openImageSearch('google')">Google Images</button>
-      <button onclick="openImageSearch('tineye')">TinEye</button>
-      <button onclick="openImageSearch('yandex')">Yandex</button>
-    </div>
-  </div>
+  <footer>
+    <p class="legal">
+      Herramienta de apoyo analítico.  
+      No ejecuta búsquedas automáticas ni almacena datos.  
+      Uso exclusivo de analistas autorizados.
+    </p>
+  </footer>
 
 </div>
 

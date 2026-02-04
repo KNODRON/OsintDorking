@@ -102,9 +102,16 @@ ul {
 
 li {
   padding: 8px 10px;
-  border-bottom: 1px solid #f2f7f5;
+  border-bottom: 1px solid #cfe4d3;
   cursor: pointer;
   font-size: 0.88rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+li:hover {
+  background: #cfe8d2;
+  color: #0b3d1e;
+  text-decoration: underline;
 }
 
 li:hover {

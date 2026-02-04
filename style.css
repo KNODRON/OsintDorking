@@ -102,9 +102,11 @@ ul {
 
 li {
   padding: 8px 10px;
-  border-bottom: 1px solid #cfe4d3;
+  border-bottom: 1px solid #c3ddc9;
   cursor: pointer;
   font-size: 0.88rem;
+  color: #0f3a22;              /* texto más firme */
+  background: #eef7f0;         /* fondo suave */
   transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -139,3 +141,9 @@ h2 {
   border-bottom: 2px solid #cfe4d3;
   padding-bottom: 6px;
 }
+
+li.visited {
+  background: #e1efe4;
+  color: #6a8f78;
+}
+

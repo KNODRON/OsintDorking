@@ -108,7 +108,7 @@ li {
 }
 
 li:hover {
-  background: #163d2e;
+  background: #2ab060;
 }
 
 .hint {
@@ -122,6 +122,6 @@ footer {
 
 .legal {
   font-size: 0.75rem;
-  color: #189657;
+  color: #ffff;
   line-height: 1.4;
 }

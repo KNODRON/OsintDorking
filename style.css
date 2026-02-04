@@ -1,10 +1,10 @@
 :root {
-  --bg-main: #e9f2ee;
-  --bg-panel: #56a65e;
-  --green-main: #202224;
-  --green-accent: #e6f2ed;
-  --text-main: #e6f4ee;
-  --text-muted: #9fbfb2;
+  --bg-main: #027a24;
+  --bg-panel: #dff0e1;
+  --green-main: #439c56;
+  --green-accent: #027a24;
+  --text-main: #027a24;
+  --text-muted: #027a24;
 }
 
 * {

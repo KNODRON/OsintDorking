@@ -128,7 +128,9 @@ function generateDorks() {
     li.onclick = () => {
       const url = `https://www.google.com/search?q=${encodeURIComponent(d)}`;
       window.open(url, "_blank", "noopener");
+      li.classList.add("visited");
     };
+
     results.appendChild(li);
   });
 }

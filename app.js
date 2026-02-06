@@ -1,6 +1,27 @@
+function sanitizeDomain(raw) {
+  // Acepta SOLO 1 dominio.
+  // Si escriben varios separados por coma/espacio, toma el primero.
+  if (!raw) return "";
+
+  // toma el primer token antes de coma / espacio / salto de línea / ;
+  let d = raw.split(/[,;\n ]+/g)[0].trim();
+  if (!d) return "";
+
+  // quita protocolo
+  d = d.replace(/^https?:\/\//i, "");
+  // quita www.
+  d = d.replace(/^www\./i, "");
+  // quita rutas /algo
+  d = d.replace(/\/.*$/, "");
+  // quita caracteres raros al final (por si pegan cosas)
+  d = d.replace(/[^\w.-]+$/g, "");
+
+  return d;
+}
+
 function generateDorks() {
   const query = document.getElementById("query").value.trim();
-  const domain = document.getElementById("domain").value.trim();
+  const domainInput = document.getElementById("domain").value.trim();
   const mode = document.querySelector('input[name="mode"]:checked').value;
   const results = document.getElementById("results");
 
@@ -12,6 +33,11 @@ function generateDorks() {
   }
 
   const Q = `"${query}"`;
+
+  // ✅ dominio 1 solo (sanitizado)
+  const domain = sanitizeDomain(domainInput);
+
+  // Si hay dominio válido, creamos el clause site:
   const SITE = domain ? ` site:${domain}` : "";
 
   let templates = [];
@@ -57,10 +83,10 @@ function generateDorks() {
       `${Q} ("contrato" OR "licitación") site:.cl`,
       `${Q} ("trabajo" OR "empleo") site:.cl`,
 
-      // Dominio específico
+      // ✅ Dominio específico (solo si el usuario ingresó uno)
       `${Q}${SITE}`,
-      `site:${domain || "example.cl"} ${Q} filetype:pdf`,
-      `site:${domain || "example.cl"} ${Q} (intitle:login OR inurl:admin)`
+      domain ? `site:${domain} ${Q} filetype:pdf` : `site:example.cl ${Q} filetype:pdf`,
+      domain ? `site:${domain} ${Q} (intitle:login OR inurl:admin)` : `site:example.cl ${Q} (intitle:login OR inurl:admin)`
     ];
   }
 
@@ -112,9 +138,9 @@ function generateDorks() {
       `${Q} site:flickr.com`,
       `${Q} site:pinterest.com`,
 
-      // Dominio específico
+      // ✅ Dominio específico (solo si el usuario ingresó uno)
       `${Q}${SITE}`,
-      `site:${domain || "example.com"} ${Q}`
+      domain ? `site:${domain} ${Q}` : `site:example.com ${Q}`
     ];
   }
 

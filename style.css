@@ -116,10 +116,6 @@ li:hover {
   text-decoration: underline;
 }
 
-li:hover {
-  background: #2ab060;
-}
-
 .hint {
   font-size: 0.8rem;
   color: var(--text-muted);

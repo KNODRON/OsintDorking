@@ -61,6 +61,7 @@ function generateDorks() {
       // Documentos
       `${Q} filetype:pdf site:.cl`,
       `${Q} filetype:doc OR filetype:docx site:.cl`,
+      `${Q} intitle:index.of /backup o intitle:index.of /password,
       `${Q} filetype:xls OR filetype:xlsx site:.cl`,
       `${Q} ("informe" OR "expediente" OR "resolución") filetype:pdf`,
       `${Q} ("orden de detención" OR "detenido")`,
@@ -71,7 +72,7 @@ function generateDorks() {
       `${Q} ("fecha de nacimiento")`,
       `${Q} ("pasaporte" OR "cédula")`,
       `${Q} ("domicilio" OR "dirección")`,
-
+                                                 
       // Prensa y comunicados
       `${Q} site:biobiochile.cl`,
       `${Q} site:emol.com`,

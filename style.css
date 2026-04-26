@@ -143,3 +143,8 @@ li.visited {
   color: #6a8f78;
 }
 
+.help-text {
+  font-size: 0.75rem;
+  color: #2f5d3a;
+  margin-top: 6px;
+}

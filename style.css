@@ -148,3 +148,23 @@ li.visited {
   color: #2f5d3a;
   margin-top: 6px;
 }
+
+.quick-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quick-buttons button {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  background: #d6eadf;
+  border: 1px solid #439c56;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quick-buttons button:hover {
+  background: #bfe2cd;
+}

@@ -19,6 +19,10 @@ function sanitizeDomain(raw) {
   return d;
 }
 
+function setQuery(value) {
+  document.getElementById("query").value = value;
+}
+
 function generateDorks() {
   const query = document.getElementById("query").value.trim();
   const domainInput = document.getElementById("domain").value.trim();

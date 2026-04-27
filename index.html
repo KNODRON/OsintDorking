@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Dorking Sección Análisis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet"href="./style.css?v=2">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
     <input type="text" id="query" placeholder="Ej: Juan Pérez / venta de loros / tráfico de drogas / armas">
 
     <p class="help-text">
-      Se puede buscar personas, alias, correos, empresas o temas de interés.
+      Se pueden buscar personas, alias, correos, empresas o temas de interés.
     </p>
 
     <label>Dominio (opcional)</label>
@@ -41,51 +41,40 @@
       </p>
     </details>
 
-    <div class="mode-select">
-      <label>
-        <input type="radio" name="mode" value="os9" checked>
-        Dorks en Chile
-      </label>
-      <label>
-        <input type="radio" name="mode" value="global">
-        Dorks Global
-      </label>
-    </div>
-
     <button class="primary-btn" onclick="generateDorks()">Generar Dorks</button>
   </section>
 
   <section class="box resource-box">
     <h2>Recursos rápidos</h2>
-    <p class="hint">Accesos útiles para búsquedas relacionadas con especies protegidas (Petición de Nico San Juan).</p>
+    <p class="hint">Selecciona una categoría de búsqueda.</p>
 
     <div class="resource-buttons category-buttons">
-      <button onclick="setCategory('chile', this)">Chile</button>
-      <button onclick="setCategory('global', this)">Global</button>
-      <button onclick="setCategory('rrss', this)">RR.SS</button>
-      <button onclick="setCategory('fauna', this)">Fauna / CITES</button>
-      <button onclick="setCategory('vehiculos', this)">Vehículos</button>
-      <button onclick="setCategory('drogas', this)">Drogas</button>
-      <button onclick="setCategory('armas', this)">Armas</button>
-      <button onclick="openCites()">CITES</button>
-      <button onclick="openSpeciesPlus()">Species+</button>
+      <button type="button" class="active-category" onclick="setCategory('chile', this)">Chile</button>
+      <button type="button" onclick="setCategory('global', this)">Global</button>
+      <button type="button" onclick="setCategory('rrss', this)">RR.SS</button>
+      <button type="button" onclick="setCategory('fauna', this)">Fauna / CITES</button>
+      <button type="button" onclick="setCategory('vehiculos', this)">Vehículos</button>
+      <button type="button" onclick="setCategory('drogas', this)">Drogas</button>
+      <button type="button" onclick="setCategory('armas', this)">Armas</button>
+      <button type="button" onclick="openCites()">CITES</button>
+      <button type="button" onclick="openSpeciesPlus()">Species+</button>
     </div>
   </section>
 
   <section class="box results-box">
     <h2>Dorks generadas</h2>
-    <p class="hint">Al hacer clic sobre una dork la busqueda será directamente en Google. La dork usada quedará marcada.</p>
+    <p class="hint">Al hacer clic sobre una dork, la búsqueda se abrirá directamente en Google. La dork usada quedará marcada.</p>
     <ul id="results"></ul>
   </section>
 
   <footer>
     <p class="legal">
-      Herramienta de apoyo para los analistas. Solo genera búsquedas sobre información pública.
+      Herramienta de apoyo para analistas. Solo genera búsquedas sobre información pública.
     </p>
   </footer>
 
 </div>
 
-<script src="./app.js?v=2"></script>
+<script src="app.js"></script>
 </body>
 </html>

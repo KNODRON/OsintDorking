@@ -63,8 +63,8 @@ body {
 }
 
 .box {
-  background: rgba(255,255,255,0.88);
-  border: 1px solid rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.95);
   border-radius: 16px;
   padding: 22px;
   margin-bottom: 22px;
@@ -74,6 +74,11 @@ body {
 
 .main-box {
   border-left: 5px solid var(--primary);
+}
+
+.results-box {
+  border-left: 5px solid var(--primary);
+  background: rgba(255,255,255,0.93);
 }
 
 label {
@@ -135,23 +140,6 @@ details.help p {
   line-height: 1.45;
 }
 
-.mode-select {
-  display: flex;
-  gap: 28px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-
-.mode-select label {
-  margin-top: 0;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.mode-select input {
-  margin-right: 7px;
-}
-
 button {
   border: none;
   cursor: pointer;
@@ -198,6 +186,12 @@ button {
   background: #c8eed2;
 }
 
+.resource-buttons button.active-category {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 5px 12px rgba(40,167,69,0.22);
+}
+
 .hint {
   font-size: 0.82rem;
   color: var(--text-muted);
@@ -217,13 +211,14 @@ li {
   gap: 8px;
   padding: 10px 12px;
   border: 1px solid var(--border);
+  border-left: 4px solid transparent;
   border-radius: 10px;
   margin-bottom: 8px;
   cursor: pointer;
   font-size: 0.9rem;
   color: #123d23;
   background: #f4fbf6;
-  transition: background 0.15s ease, transform 0.1s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-left-color 0.15s ease;
 }
 
 li::before {
@@ -234,7 +229,7 @@ li::before {
 li:hover {
   background: #d9f2df;
   color: #072d16;
-  transform: translateX(2px);
+  border-left-color: var(--primary);
 }
 
 li.visited {
@@ -280,8 +275,8 @@ footer {
     padding: 14px;
   }
 
-  .mode-select {
-    gap: 16px;
+  .resource-buttons button {
+    flex: 1 1 auto;
   }
 
   ul {

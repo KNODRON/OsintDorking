@@ -234,7 +234,7 @@ li::before {
 li:hover {
   background: #d9f2df;
   color: #072d16;
-  transform: translateX(2px);
+  border-left: 4px solid var(--primary);
 }
 
 li.visited {

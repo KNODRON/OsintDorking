@@ -1,3 +1,5 @@
+let selectedCategory = "chile";
+
 function sanitizeDomain(raw) {
   if (!raw) return "";
 
@@ -12,6 +14,16 @@ function sanitizeDomain(raw) {
   return d;
 }
 
+function setCategory(category, btn) {
+  selectedCategory = category;
+
+  document.querySelectorAll(".category-buttons button").forEach(b => {
+    b.classList.remove("active-category");
+  });
+
+  if (btn) btn.classList.add("active-category");
+}
+
 function openCites() {
   window.open("https://cites.org/esp", "_blank", "noopener");
 }
@@ -23,7 +35,6 @@ function openSpeciesPlus() {
 function generateDorks() {
   const query = document.getElementById("query").value.trim();
   const domainInput = document.getElementById("domain").value.trim();
-  const mode = document.querySelector('input[name="mode"]:checked').value;
   const results = document.getElementById("results");
 
   results.innerHTML = "";
@@ -36,45 +47,19 @@ function generateDorks() {
   const Q = `"${query}"`;
   const domain = sanitizeDomain(domainInput);
 
-  let templates = [];
+  let category = selectedCategory;
 
-  // ==================================================
-  // SI HAY DOMINIO: TODAS LAS DORKS SE ACOTAN AL DOMINIO
-  // ==================================================
-  if (domain) {
-    templates = [
-      `site:${domain} ${Q}`,
-      `site:${domain} ${Q} filetype:pdf`,
-      `site:${domain} ${Q} filetype:doc OR filetype:docx`,
-      `site:${domain} ${Q} filetype:xls OR filetype:xlsx`,
-      `site:${domain} ${Q} filetype:ppt OR filetype:pptx`,
-      `site:${domain} ${Q} ("informe" OR "reporte")`,
-      `site:${domain} ${Q} ("comunicado" OR "noticia")`,
-      `site:${domain} ${Q} ("resolución" OR "documento")`,
-      `site:${domain} ${Q} ("contrato" OR "licitación")`,
-      `site:${domain} ${Q} ("contacto" OR "teléfono" OR "correo")`,
-      `site:${domain} ${Q} inurl:contacto`,
-      `site:${domain} ${Q} inurl:noticias`,
-      `site:${domain} ${Q} inurl:comunicado`,
-      `site:${domain} ${Q} inurl:documentos`,
-      `site:${domain} ${Q} inurl:pdf`,
-      `site:${domain} ${Q} intitle:informe`,
-      `site:${domain} ${Q} intitle:comunicado`,
-      `site:${domain} ${Q} intitle:resolución`,
-      `site:${domain} ${Q} ("fecha de nacimiento")`,
-      `site:${domain} ${Q} ("RUT" OR "rut")`,
-      `site:${domain} ${Q} ("domicilio" OR "dirección")`,
-      `site:${domain} ${Q} ("curriculum" OR "cv")`,
-      `site:${domain} ${Q} ("trabajo" OR "empleo")`,
-      `site:${domain} ${Q} ("imagen" OR "foto")`,
-      `site:${domain} ${Q} ("archivo" OR "registro")`
-    ];
+  // Compatibilidad con radios antiguos si todavía existen
+  const oldMode = document.querySelector('input[name="mode"]:checked');
+  if (oldMode && selectedCategory === "chile") {
+    category = oldMode.value === "global" ? "global" : "chile";
   }
 
-  // ==================================================
-  // MODO CHILE SIN DOMINIO
-  // ==================================================
-  if (!domain && mode === "os9") {
+  let templates = [];
+
+  const addDomain = dork => domain ? `site:${domain} ${dork}` : dork;
+
+  if (category === "chile") {
     templates = [
       `site:pjud.cl ${Q}`,
       `site:tribunales.cl ${Q}`,
@@ -84,74 +69,120 @@ function generateDorks() {
       `site:registrocivil.cl ${Q}`,
       `site:diariooficial.interior.gob.cl ${Q}`,
       `site:contraloria.cl ${Q}`,
-      `site:t.me ("joinchat" OR "invite") ${Q}`,
-      `site:t.me "palabra clave" ${Q}`,
       `${Q} filetype:pdf site:.cl`,
       `${Q} filetype:doc OR filetype:docx site:.cl`,
       `${Q} filetype:xls OR filetype:xlsx site:.cl`,
-      `${Q} filetype:ppt OR filetype:pptx site:.cl`,
       `${Q} ("informe" OR "expediente" OR "resolución") filetype:pdf`,
       `${Q} ("orden de detención" OR "detenido")`,
-      `${Q} (intitle:denuncia OR intitle:detenido)`,
       `${Q} ("RUT" OR "rut")`,
-      `${Q} ("fecha de nacimiento")`,
-      `${Q} ("pasaporte" OR "cédula")`,
       `${Q} ("domicilio" OR "dirección")`,
       `${Q} site:biobiochile.cl`,
       `${Q} site:emol.com`,
       `${Q} site:latercera.com`,
-      `${Q} site:soychile.cl`,
-      `${Q} ("comunicado" OR "informe") site:.cl`,
-      `${Q} ("contrato" OR "licitación") site:.cl`,
-      `${Q} ("trabajo" OR "empleo") site:.cl`,
-      `${Q} ("curriculum" OR "cv") site:.cl`,
-      `${Q} ("correo" OR "email" OR "teléfono") site:.cl`,
-      `${Q} ("foto" OR "imagen") site:.cl`,
-      `${Q} "t.me/" "keyword"`,
-      `${Q} "t.me" "lista de canales"`,
-      `${Q} site:t.me ("es" OR "latam" OR "español"`,
-      `${Q} site:t.me "frase exacta"`,
-      `${Q} ("registro" OR "archivo") site:.cl`
+      `${Q} site:soychile.cl`
     ];
   }
 
-  // ==================================================
-  // MODO GLOBAL SIN DOMINIO
-  // ==================================================
-  if (!domain && mode === "global") {
+  if (category === "global") {
     templates = [
-      `${Q} site:facebook.com`,
-      `${Q} site:instagram.com`,
-      `${Q} site:linkedin.com`,
-      `${Q} site:x.com OR site:twitter.com`,
-      `${Q} site:tiktok.com`,
-      `${Q} site:youtube.com`,
-      `${Q} site:reddit.com`,
-      `${Q} site:telegram.org`,
-      `${Q} site:telegram.me "keyword"`,
-      `${Q} site:vk.com`,
-      `${Q} site:medium.com`,
-      `${Q} site:wordpress.com`,
-      `${Q} site:blogspot.com`,
-      `${Q} inurl:blog OR inurl:post`,
-      `${Q} site:github.com`,
-      `${Q} site:gitlab.com`,
-      `${Q} site:pastebin.com`,
-      `${Q} site:archive.org`,
       `${Q} filetype:pdf`,
       `${Q} filetype:doc OR filetype:docx`,
       `${Q} filetype:xls OR filetype:xlsx`,
       `${Q} filetype:ppt OR filetype:pptx`,
       `${Q} filetype:txt`,
       `${Q} ("curriculum" OR "cv" OR "resume")`,
-      `${Q} (intitle:curriculum OR intitle:cv)`,
-      `${Q} ("@gmail.com" OR "@hotmail.com" OR "@outlook.com")`,
-      `${Q} ("tel" OR "phone" OR "+56")`,
-      `${Q} (intitle:contact OR inurl:contact)`,
+      `${Q} ("correo" OR "email" OR "teléfono" OR "phone")`,
       `${Q} ("foto" OR "imagen")`,
-      `${Q} site:flickr.com`,
-      `${Q} site:pinterest.com`
+      `${Q} ("informe" OR "reporte")`,
+      `${Q} ("comunicado" OR "noticia")`,
+      `${Q} site:archive.org`,
+      `${Q} site:medium.com`,
+      `${Q} site:wordpress.com`,
+      `${Q} site:blogspot.com`
     ];
+  }
+
+  if (category === "rrss") {
+    templates = [
+      `${Q} site:facebook.com`,
+      `${Q} site:instagram.com`,
+      `${Q} site:linkedin.com`,
+      `${Q} site:tiktok.com`,
+      `${Q} site:x.com OR site:twitter.com`,
+      `${Q} site:youtube.com`,
+      `${Q} site:reddit.com`,
+      `${Q} site:t.me`,
+      `${Q} site:telegram.org`,
+      `${Q} "t.me/"`,
+      `${Q} ("grupo telegram" OR "canal telegram")`,
+      `${Q} ("perfil" OR "usuario")`,
+      `${Q} ("foto" OR "imagen")`
+    ];
+  }
+
+  if (category === "fauna") {
+    templates = [
+      `${Q} ("CITES" OR "Species+")`,
+      `${Q} ("especie protegida" OR "especies protegidas")`,
+      `${Q} ("fauna silvestre" OR "animal protegido")`,
+      `${Q} ("animal exótico" OR "mascota exótica")`,
+      `${Q} ("venta" OR "vendo" OR "se vende") ("loro" OR "tortuga" OR "iguana" OR "ave exótica")`,
+      `${Q} ("tráfico" OR "comercio ilegal") ("fauna" OR "animales")`,
+      `${Q} site:facebook.com ("venta" OR "vendo") ("animal" OR "loro" OR "tortuga")`,
+      `${Q} site:instagram.com ("venta" OR "disponible") ("animal" OR "exótico")`,
+      `${Q} filetype:pdf ("fauna" OR "CITES" OR "especies protegidas")`,
+      `${Q} ("incautación" OR "decomiso") ("fauna" OR "animales")`
+    ];
+  }
+
+  if (category === "vehiculos") {
+    templates = [
+      `${Q} ("vehículo" OR "auto" OR "camioneta")`,
+      `${Q} ("patente" OR "placa")`,
+      `${Q} ("robo" OR "robado") ("vehículo" OR "auto")`,
+      `${Q} ("encargo" OR "búsqueda") ("vehículo" OR "patente")`,
+      `${Q} ("venta" OR "vendo") ("auto" OR "vehículo")`,
+      `${Q} site:facebook.com ("venta" OR "vendo") ("auto" OR "vehículo")`,
+      `${Q} site:yapo.cl ("auto" OR "vehículo")`,
+      `${Q} site:chileautos.cl`,
+      `${Q} ("accidente" OR "choque") ("vehículo" OR "auto")`,
+      `${Q} filetype:pdf ("vehículo" OR "patente")`
+    ];
+  }
+
+  if (category === "drogas") {
+    templates = [
+      `${Q} ("droga" OR "cocaína" OR "marihuana" OR "pasta base")`,
+      `${Q} ("narco" OR "narcotráfico" OR "microtráfico")`,
+      `${Q} ("incautación" OR "decomiso") ("droga" OR "narcótico")`,
+      `${Q} ("detenido" OR "imputado") ("droga" OR "narcotráfico")`,
+      `${Q} ("cultivo indoor" OR "laboratorio clandestino")`,
+      `${Q} ("punto de venta" OR "venta de droga")`,
+      `${Q} site:facebook.com ("droga" OR "marihuana" OR "weed")`,
+      `${Q} site:instagram.com ("marihuana" OR "weed")`,
+      `${Q} filetype:pdf ("droga" OR "narcotráfico" OR "microtráfico")`,
+      `${Q} ("distribución" OR "tráfico") ("droga" OR "narcótico")`
+    ];
+  }
+
+  if (category === "armas") {
+    templates = [
+      `${Q} ("arma" OR "pistola" OR "revólver")`,
+      `${Q} ("tenencia ilegal" OR "porte de arma")`,
+      `${Q} ("munición" OR "cartuchos")`,
+      `${Q} ("disparo" OR "balacera")`,
+      `${Q} ("incautación" OR "decomiso") ("arma" OR "armamento")`,
+      `${Q} ("detenido" OR "imputado") ("arma" OR "armas")`,
+      `${Q} ("calibre" OR "munición")`,
+      `${Q} site:facebook.com ("arma" OR "pistola" OR "munición")`,
+      `${Q} filetype:pdf ("arma" OR "armamento" OR "munición")`,
+      `${Q} ("procedimiento" OR "allanamiento") ("arma" OR "armas")`
+    ];
+  }
+
+  // Si hay dominio, todas las dorks se acotan al dominio ingresado
+  if (domain) {
+    templates = templates.map(d => addDomain(d));
   }
 
   const dorks = templates.slice(0, 45);

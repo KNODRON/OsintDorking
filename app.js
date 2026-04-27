@@ -84,6 +84,8 @@ function generateDorks() {
       `site:registrocivil.cl ${Q}`,
       `site:diariooficial.interior.gob.cl ${Q}`,
       `site:contraloria.cl ${Q}`,
+      `site:t.me ("joinchat" OR "invite") ${Q}`,
+      `site:t.me "palabra clave" ${Q}`,
       `${Q} filetype:pdf site:.cl`,
       `${Q} filetype:doc OR filetype:docx site:.cl`,
       `${Q} filetype:xls OR filetype:xlsx site:.cl`,
@@ -105,6 +107,10 @@ function generateDorks() {
       `${Q} ("curriculum" OR "cv") site:.cl`,
       `${Q} ("correo" OR "email" OR "teléfono") site:.cl`,
       `${Q} ("foto" OR "imagen") site:.cl`,
+      `${Q} "t.me/" "keyword"`,
+      `${Q} "t.me" "lista de canales"`,
+      `${Q} site:t.me ("es" OR "latam" OR "español"`,
+      `${Q} site:t.me "frase exacta"`,
       `${Q} ("registro" OR "archivo") site:.cl`
     ];
   }
@@ -122,6 +128,7 @@ function generateDorks() {
       `${Q} site:youtube.com`,
       `${Q} site:reddit.com`,
       `${Q} site:telegram.org`,
+      `${Q} site:telegram.me "keyword"`,
       `${Q} site:vk.com`,
       `${Q} site:medium.com`,
       `${Q} site:wordpress.com`,

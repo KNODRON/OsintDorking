@@ -10,65 +10,58 @@
 
 <div class="container">
 
-  <header>
-    <h1>Dorking Sección Análisis</h1>
-    <p class="subtitle">Generador de DorKings</p>
+  <header class="header">
+    <h1>🔎 OSINT Dorking</h1>
+    <p class="subtitle">Generador de búsquedas avanzadas en Google</p>
+    <span class="badge">Uso interno analistas</span>
   </header>
 
   <section class="box">
+
     <label>Texto a buscar</label>
-    <input type="text" id="query" placeholder="Ej: Juan Pérez / venta de loros / tráfico de drogas / armas">
+    <input type="text" id="query"
+      placeholder="Ej: Juan Pérez / venta de loros / tráfico de drogas / armas">
 
     <p class="help-text">
-      se pueden buscar personas o temas (ej: venta de animales, drogas, armas, vehículos).
+      Puedes buscar personas o temas: animales, drogas, armas, vehículos, etc.
     </p>
-    
+
     <label>Dominio (opcional)</label>
-    <input type="text" id="domain" placeholder="ej: dominio.cl, dominio.com">
+    <input type="text" id="domain" placeholder="ej: carabineros.cl">
+
     <details class="help">
-      <summary>¿Cómo funciona la búsqueda por dominio? Clic Aquí</summary>
+      <summary>¿Cómo funciona la búsqueda por dominio?</summary>
       <p>
-        El dominio permite acotar la búsqueda a un sitio específico.
-        <br><br>
-        <strong>Ejemplo:</strong><br>
-        Texto: <em>Sueldo</em><br>
-        Dominio: <em>carabineros.cl</em><br><br>
-        Buscará solo resultados públicos dentro de ese dominio.
-        <br><br>
-        El campo es opcional.
+        Limita la búsqueda a un sitio específico.<br><br>
+        Ej: "Juan Pérez" + carabineros.cl → solo resultados dentro de ese sitio.
       </p>
     </details>
 
     <div class="mode-select">
-      <label>
-        <input type="radio" name="mode" value="os9" checked>
-        Dorks en Chile
-      </label>
-      <label>
-        <input type="radio" name="mode" value="global">
-        Dorks Global
-      </label>
+      <label><input type="radio" name="mode" value="os9" checked> Chile</label>
+      <label><input type="radio" name="mode" value="global"> Global</label>
     </div>
 
     <button onclick="generateDorks()">Generar Dorks</button>
-  </section>
 
-  <div class="quick-buttons">
-    <button onclick="setQuery('venta de animales')">Fauna</button>
-    <button onclick="setQuery('tráfico de drogas')">Drogas</button>
-    <button onclick="setQuery('venta de armas')">Armas</button>
-    <button onclick="setQuery('vehículo robado')">Vehículos</button>
-  </div>
+    <div class="quick-buttons">
+      <button onclick="setQuery('venta de animales')">Fauna</button>
+      <button onclick="setQuery('tráfico de drogas')">Drogas</button>
+      <button onclick="setQuery('venta de armas')">Armas</button>
+      <button onclick="setQuery('vehículo robado')">Vehículos</button>
+    </div>
+
+  </section>
 
   <section class="box">
     <h2>Dorks generadas</h2>
-    <p class="hint">Hacer clic sobre una dork para buscarla directamente en Google.</p>
+    <p class="hint">Haz clic para buscar en Google</p>
     <ul id="results"></ul>
   </section>
 
   <footer>
     <p class="legal">
-      Herramienta de apoyo con uso exclusivo para los analistas.
+      Herramienta OSINT — solo utiliza información pública indexada.
     </p>
   </footer>
 

@@ -21,7 +21,9 @@ function setCategory(category, btn) {
     b.classList.remove("active-category");
   });
 
-  if (btn) btn.classList.add("active-category");
+  if (btn) {
+    btn.classList.add("active-category");
+  }
 }
 
 function openCites() {
@@ -47,19 +49,9 @@ function generateDorks() {
   const Q = `"${query}"`;
   const domain = sanitizeDomain(domainInput);
 
-  let category = selectedCategory;
-
-  // Compatibilidad con radios antiguos si todavía existen
-  const oldMode = document.querySelector('input[name="mode"]:checked');
-  if (oldMode && selectedCategory === "chile") {
-    category = oldMode.value === "global" ? "global" : "chile";
-  }
-
   let templates = [];
 
-  const addDomain = dork => domain ? `site:${domain} ${dork}` : dork;
-
-  if (category === "chile") {
+  if (selectedCategory === "chile") {
     templates = [
       `site:pjud.cl ${Q}`,
       `site:tribunales.cl ${Q}`,
@@ -83,7 +75,7 @@ function generateDorks() {
     ];
   }
 
-  if (category === "global") {
+  if (selectedCategory === "global") {
     templates = [
       `${Q} filetype:pdf`,
       `${Q} filetype:doc OR filetype:docx`,
@@ -102,7 +94,7 @@ function generateDorks() {
     ];
   }
 
-  if (category === "rrss") {
+  if (selectedCategory === "rrss") {
     templates = [
       `${Q} site:facebook.com`,
       `${Q} site:instagram.com`,
@@ -120,7 +112,7 @@ function generateDorks() {
     ];
   }
 
-  if (category === "fauna") {
+  if (selectedCategory === "fauna") {
     templates = [
       `${Q} ("CITES" OR "Species+")`,
       `${Q} ("especie protegida" OR "especies protegidas")`,
@@ -135,7 +127,7 @@ function generateDorks() {
     ];
   }
 
-  if (category === "vehiculos") {
+  if (selectedCategory === "vehiculos") {
     templates = [
       `${Q} ("vehículo" OR "auto" OR "camioneta")`,
       `${Q} ("patente" OR "placa")`,
@@ -150,7 +142,7 @@ function generateDorks() {
     ];
   }
 
-  if (category === "drogas") {
+  if (selectedCategory === "drogas") {
     templates = [
       `${Q} ("droga" OR "cocaína" OR "marihuana" OR "pasta base")`,
       `${Q} ("narco" OR "narcotráfico" OR "microtráfico")`,
@@ -165,7 +157,7 @@ function generateDorks() {
     ];
   }
 
-  if (category === "armas") {
+  if (selectedCategory === "armas") {
     templates = [
       `${Q} ("arma" OR "pistola" OR "revólver")`,
       `${Q} ("tenencia ilegal" OR "porte de arma")`,
@@ -180,9 +172,8 @@ function generateDorks() {
     ];
   }
 
-  // Si hay dominio, todas las dorks se acotan al dominio ingresado
   if (domain) {
-    templates = templates.map(d => addDomain(d));
+    templates = templates.map(dork => `site:${domain} ${dork}`);
   }
 
   const dorks = templates.slice(0, 45);
